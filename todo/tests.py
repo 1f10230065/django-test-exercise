@@ -3,10 +3,12 @@ from django.utils import timezone
 from datetime import datetime
 from todo.models import Task
 
+
 # Create your tests here.
 class SampleTestCase(TestCase):
     def test_sample(self):
         self.assertEqual(1 + 2, 3)
+
 
 class TaskModelTestCase(TestCase):
     def test_create_task1(self):
@@ -51,6 +53,7 @@ class TaskModelTestCase(TestCase):
 
         self.assertFalse(task.is_overdue(current))
 
+
 class TodoViewTestCase(TestCase):
     def test_index_get(self):
         client = Client()
@@ -70,9 +73,21 @@ class TodoViewTestCase(TestCase):
         self.assertEqual(len(response.context['tasks']), 1)
 
     def test_index_get_order_post(self):
-        task1 = Task(title='task1', due_at=timezone.make_aware(datetime(2024, 7, 1)))
+        task1 = Task(
+            title='task1',
+            due_at=timezone.make_aware(
+                datetime(
+                    2024,
+                    7,
+                    1)))
         task1.save()
-        task2 = Task(title='task2', due_at=timezone.make_aware(datetime(2024, 8, 1)))
+        task2 = Task(
+            title='task2',
+            due_at=timezone.make_aware(
+                datetime(
+                    2024,
+                    8,
+                    1)))
         task2.save()
 
         client = Client()
@@ -84,9 +99,21 @@ class TodoViewTestCase(TestCase):
         self.assertEqual(response.context['tasks'][1], task1)
 
     def test_index_get_order_due(self):
-        task1 = Task(title='task1', due_at=timezone.make_aware(datetime(2024, 7, 1)))
+        task1 = Task(
+            title='task1',
+            due_at=timezone.make_aware(
+                datetime(
+                    2024,
+                    7,
+                    1)))
         task1.save()
-        task2 = Task(title='task2', due_at=timezone.make_aware(datetime(2024, 8, 1)))
+        task2 = Task(
+            title='task2',
+            due_at=timezone.make_aware(
+                datetime(
+                    2024,
+                    8,
+                    1)))
         task2.save()
 
         client = Client()
